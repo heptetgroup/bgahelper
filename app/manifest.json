@@ -1,0 +1,31 @@
+{
+  "name": "__MSG_appName__",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/chromereload.js",
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*.boardgamearena.com/*"],
+	"css": [ "bower_components/datatables.net-dt/css/jquery.dataTables.css" ],
+	"js": ["bower_components/jquery/dist/jquery.js",
+	       "bower_components/datatables.net/js/jquery.dataTables.js",
+	       "scripts/bgaext.js"]
+    }
+  ]
+}

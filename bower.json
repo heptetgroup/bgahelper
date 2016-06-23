@@ -1,0 +1,14 @@
+{
+  "name": "bgahelper",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "^3.0.0",
+    "datatables.net": "^1.10.12",
+    "datatables.net-dt": "^1.10.12"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
