@@ -3,6 +3,23 @@
  */
 
 var games = Array();
+var port = chrome.runtime.connect({name: 'bgahelper'});
+port.postMessage({event: 'initialize', message: 'BGA Helper content script executing...'});
+
+console.log("window id = " + window.id);
+
+//chrome.windows.get(chrome.windows.WINDOW_ID_CURRENT, {}, function(window) {
+    port.postMessage({event: 'checkWindow', windowId: 0});
+//});
+
+chrome.runtime.onConnect.addListener(function(port) {
+    console.assert(port.name == "bgahelper");
+    port.onMessage.addListener(function(msg) {
+	if(msg.event === 'checkWindowResponse') {
+	    console.log(msg.event);
+	}
+    });
+});
 
 var gameTable;
 var windowObjectReference = null; // global variable
@@ -58,7 +75,7 @@ function openGameListWindow() {
   };
 }
 
-openGameListWindow();
+//openGameListWindow();
 
 function gameTracker(mutations) {
     mutations.forEach(function (m) {
@@ -106,9 +123,9 @@ var target = document.getElementById('main-content'); //gamelobby_inner
 		      {
 			  var target2 = document.getElementById('gametables_other');
 			  var observer2 = new MutationObserver(gameTracker);
-			  console.log('observing');
+//			  console.log('observing');
 
-			  observer2.observe(target2, { childList: true });
+//			  observer2.observe(target2, { childList: true });
 			  
 		      }
 
