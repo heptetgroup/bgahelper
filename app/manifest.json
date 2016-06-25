@@ -16,9 +16,12 @@
     "browser_action": { "default_icon": { "19": "images/icon-16.png" },
 			"default_title": "BGA Helper"
 		      },
-    "background": { //"page": "http://en.boardgamearena.com/#!gamelobby",
-		     "scripts": ["scripts/eventpage.js",
-				 "scripts/chromereload.js",
-				 "scripts/background.js" ],
-		     "persistent": false }
+    "background":
+    { //"page": "http://en.boardgamearena.com/#!gamelobby",
+	"scripts": ["scripts/eventpage.js",
+		    "scripts/chromereload.js",
+		    "scripts/background.js",
+		    "bower_components/jquery/dist/jquery.js",
+		    "bower_components/datatables.net/js/jquery.dataTables.js"],
+	"persistent": false }
 }

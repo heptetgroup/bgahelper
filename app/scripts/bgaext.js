@@ -101,7 +101,8 @@ function gameTracker(mutations) {
 		var id = q[0].id.substring(10);
 		var game = [id, gameName, status, exp, restrictions, places.length];
 		console.log(game);
-		getGameTable().row.add(game).draw();
+		port.postMessage({ event: 'addGame', game: game });
+//		getGameTable().row.add(game).draw();
 		if(places.find('.freeplace').length)
 		{
 //		    window.location.href = q.find('.gametablelink').attr('href');
