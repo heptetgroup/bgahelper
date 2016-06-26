@@ -30,7 +30,10 @@ chrome.runtime.onConnect.addListener(function(port) {
 		row.remove().draw();
 	    }
 	}
-	
+	else if(msg.event == 'updateGame')
+	{
+	    console.log(msg);
+	}
 	
     });
 });
