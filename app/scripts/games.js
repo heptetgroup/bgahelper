@@ -1,4 +1,7 @@
+$(document).ready(performOnDocumentReady);
+
 var port = chrome.runtime.connect({name:'games'});
+var gamesTable = null;
 
 chrome.runtime.onConnect.addListener(function(port) {
     console.assert(port.name == 'games');
@@ -11,6 +14,24 @@ chrome.runtime.onConnect.addListener(function(port) {
 	} else {
 	    console.log(msg.event);
 	}
+	if(msg.event === 'addGame')
+	{
+	    gamesTable.row.add(msg.game).draw();
+	}
+	else if (msg.event == 'removeGame')
+	{
+	    var id = msg.gameId;
+	    var row = gamesTable.row('#_' + id);
+	    console.log('id = ' + id);
+	    console.log('row = ' + row.length);
+	    if(row)
+	    {
+		console.log('calling remove');
+		row.remove().draw();
+	    }
+	}
+	
+	
     });
 });
 
@@ -20,4 +41,14 @@ document.getElementById('pingbutton').addEventListener('click', doPing);
 function doPing()
 {
     port.postMessage({event:'ping'});
+}
+
+function initializeDataTable()
+{
+    gamesTable = $('#gamestable').DataTable({ rowId: '0', columns: [ { title: 'ID' }, { title: 'Game' }, { title: 'Status' }, { title: 'Parameters' } , { title: 'Restrictions' }, { title: 'No. of Players' }  ] });
+}
+
+function performOnDocumentReady()
+{
+    initializeDataTable();
 }
